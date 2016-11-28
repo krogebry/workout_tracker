@@ -33,6 +33,39 @@ var routes = Routes{
     "/",
     Index,
   },
+
+  Route{
+    "Workouts",
+    "GET",
+    "/workouts",
+    ListWorkouts,
+  },
+
+  Route{
+    "ViewWorkout",
+    "GET",
+    "/workouts/{workoutId}",
+    ViewWorkout,
+  },
+
+  Route{
+    "CreateWorkout",
+    "POST",
+    "/workouts",
+    CreateWorkout,
+  },
+
+  Route{
+    "LogExcerciseRepitition",
+    "POST",
+    "/workouts/excercise/{excerciseId}/log_reps",
+    LogExcerciseRepitition,
+  },
+
+
+
+
+
   Route{
     "TodoIndex",
     "GET",
@@ -45,12 +78,21 @@ var routes = Routes{
     "/todos/{todoId}",
     TodoShow,
   },
+
   Route{
     "version",
     "GET",
     "/version",
     StatusVersion,
   },
+
+  Route{
+    "healthz",
+    "GET",
+    "/healthz",
+    Healthz,
+  },
+
 }
 
 

@@ -14,8 +14,9 @@ dc_up:
 	docker-compose up
 
 deps:
+	go get gopkg.in/mgo.v2
 	#cd src/github.com/krogebry/workout_tracker/
-	PWD="${HOME}/dev/workout_tracker/src/github.com/krogebry/workout_tracker/" go get 
+	#PWD="${HOME}/dev/workout_tracker/src/github.com/krogebry/workout_tracker/" go get 
 
 build:
 	go build ${LDFLAGS} -o bin/${BINARY} src/github.com/krogebry/workout_tracker/*.go

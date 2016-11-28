@@ -17,11 +17,19 @@ type VersionInfo struct {
   Hostname  string  `json:"hostname"`
 }
 
+type HealthInfo struct {
+  Status    string  `json:"version"`
+}
+
 func StatusVersion(w http.ResponseWriter, r *http.Request) {
-  //fmt.Fprintf(w, "Version: %q - %q", Version, BuildTime)
-
   info := VersionInfo{ Version, BuildTime, "" }
+  if err := json.NewEncoder(w).Encode(info); err != nil {
+    panic(err)
+  }
+}
 
+func Healthz(w http.ResponseWriter, r *http.Request) {
+  info := HealthInfo{ "up" }
   if err := json.NewEncoder(w).Encode(info); err != nil {
     panic(err)
   }

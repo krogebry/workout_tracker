@@ -9,7 +9,8 @@ services:
       - "8080:8080"
     depends_on:
       - redis
+      - database
   redis:
     image: redis
-  #db:
-  #image: mongodb
+  database:
+    image: mongo
