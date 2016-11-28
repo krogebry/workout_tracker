@@ -1,5 +1,0 @@
-FROM 1.7.3-alpine
-
-MKDIR /opt/wt/bin
-
-COPY ../bin/workout_tracker ./opt/wt/bin/

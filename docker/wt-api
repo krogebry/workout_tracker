@@ -1,0 +1,11 @@
+#FROM golang:alpine
+FROM golang:wheezy
+
+RUN mkdir -p /opt/wt/bin
+
+COPY bin/wt-api /opt/wt/bin/wt-api
+
+ENTRYPOINT ["/opt/wt/bin/wt-api"]
+#ENTRYPOINT ["/bin/bash"]
+
+EXPOSE 8080
