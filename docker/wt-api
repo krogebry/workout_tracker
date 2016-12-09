@@ -2,10 +2,11 @@
 FROM golang:wheezy
 
 RUN mkdir -p /opt/wt/bin
+RUN mkdir -p /var/log/wt-api/
 
 COPY bin/wt-api /opt/wt/bin/wt-api
 
-ENTRYPOINT ["/opt/wt/bin/wt-api"]
-#ENTRYPOINT ["/bin/bash"]
+#CMD /opt/wt/bin/wt-api >> /var/log/wt-api/api.log 2>&1
+ENTRYPOINT ["/opt/wt/bin/wt-api"] 
 
 EXPOSE 8080

@@ -1,17 +1,14 @@
 package main
 
 import (
-  //"fmt"
-  "log"
-  //"html"
-  //"time"
+  "os"
   "net/http"
-  //"encoding/json"
-
-  //"github.com/gorilla/mux"
+  log "github.com/Sirupsen/logrus"
 )
 
 func main() {
+  log.SetFormatter(&log.JSONFormatter{})
+  log.SetOutput(os.Stdout)
   router := NewRouter()
   log.Fatal(http.ListenAndServe(":8080", router))
 }

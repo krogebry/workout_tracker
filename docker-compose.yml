@@ -5,12 +5,32 @@ services:
     build:
       context: ./
       dockerfile: ./docker/wt-api
+    volumes:
+      - /mnt/data/wt/logs/:/var/log/wt-api/
+    #logging:
+      #driver: syslog
+      #options:
+        #syslog-address: tcp://192.168.56.101:5000
+    #links:
+      #- database
     ports:
       - "8080:8080"
-    depends_on:
-      - redis
-      - database
-  redis:
-    image: redis
-  database:
-    image: mongo
+    #depends_on:
+      #- elk
+      #- redis
+      #- database
+  #elk:
+    #image: sebp/elk
+    #ports:
+      #- "5601:5601"
+      #- "9200:9200"
+      #- "5044:5044"
+  #redis:
+    #image: redis
+  #database:
+    #image: mongo
+    #ports:
+      #- "27017:27017"
+    #volumes:
+      #- /mnt/data/wt/mongodb:/data/db
+
