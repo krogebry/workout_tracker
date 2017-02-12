@@ -75,23 +75,6 @@ var routes = Routes{
     LogExcerciseRepitition,
   },
 
-
-
-
-
-  Route{
-    "TodoIndex",
-    "GET",
-    "/todos",
-    TodoIndex,
-  },
-  Route{
-    "TodoShow",
-    "GET",
-    "/todos/{todoId}",
-    TodoShow,
-  },
-
   Route{
     "version",
     "GET",

@@ -1,2 +1,3 @@
 bin*
 pkg/*
+client_secret.json
