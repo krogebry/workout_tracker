@@ -1,5 +1,30 @@
 #!/usr/bin/env ruby
+# sum(
+#   (C1/D1)*DAY(
+#     INDIRECT( 
+#       ADDRESS( ROW() , 1 ) 
+#     )
+#   )
+#   -
+#   SUM(B2:INDIRECT( 
+#     ADDRESS( ROW( ) , 2 ) 
+#   ))
+# )
 
+## Sum
+## => total_points / num_days_in_month
+## => * current day
+## - Sum
+## => num points total so far
+
+## Num points per day: 28 / 100 = 2.8 ( 3 )
+## 2.8 * 13 = 36.4
+## 36.4 - 22 = 14 
+
+## num_points_so_far = 22
+## num_points_left = 100 - 22
+## num_days_left = 16
+## num_points_per_day = 78 / 16 = 4.875
 require 'google/apis/sheets_v4'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
@@ -9,6 +34,10 @@ require 'logger'
 require 'fileutils'
 
 Log = Logger.new(STDOUT)
+
+FLUSH_CACHE = true
+UPDATE_REPORT = true
+UPDATE_MONTH_CELL = false
 
 OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
 APPLICATION_NAME = 'Google Sheets API Ruby Quickstart'
@@ -61,57 +90,75 @@ progress_report = {}
 num_days_this_month.times do |i|
   progress_report[i+1] = {}
 end
-#pp progress_report
-#exit
 
-flush_cache = false
 
-if flush_cache
+if FLUSH_CACHE
+  Log.debug("Getting from source.")
   read_range = 'Form Responses 1!A2:E'
   response = service.get_spreadsheet_values(spreadsheet_id, read_range)
   puts 'No data found.' if response.values.empty?
+  data = response.values
+  #pp data.to_json
+  
+  File.open("/tmp/data.json", "w") do |f|
+    f.puts( data.to_json )
+  end
+
 else
   data = JSON::parse(File.read("/tmp/data.json"))
+
 end
 
-#response.values.each do |row|
+num_points_so_far = 0.0
+
 data.each do |row|
   ts = Time.strptime( row[0], "%m/%d/%Y %T" )
   activity = row[1]
   effort = row[2].to_i
   notes = row[3]
   points = row[4].to_i
-  Log.debug("%s - %s - %s" % [ts.day, points, activity])
+
+  Log.debug("%s - %s - %s" % [ts, points, activity])
+  
   progress_report[ts.day][:points] = 0 if !progress_report[ts.day].has_key?( :points )
   progress_report[ts.day][:points] += points
-  #progress_report.push(row)
-end
-
-if flush_cache
-  File.open("/tmp/data.json", "w") do |f|
-    f.puts(progress_report.to_json)
-  end
+  num_points_so_far += points
 end
 
 batch = Google::Apis::SheetsV4::BatchUpdateValuesRequest.new()
 value_data = []
+
+monthly_goal = 100.0
+num_days_left = num_days_this_month.to_f - current_time.mday.to_f
+average_goal_per_day = (monthly_goal - num_points_so_far) / num_days_left
+Log.debug("Average goal: %.2f" % average_goal_per_day)
+
 for day_number, row in progress_report
   write_range = "100 points!A%i" % (day_number+1)
   values = Google::Apis::SheetsV4::ValueRange.new()
   date_str = "%s/%s/%s" % [this_month, day_number, current_time.year]
-  values.update!( :range => write_range, :values => [ [ date_str, row[:points] ] ])
+  
+  if day_number >= current_time.mday
+    values.update!( :range => write_range, :values => [ [ date_str, row[:points], average_goal_per_day ] ])
+  else
+    values.update!( :range => write_range, :values => [ [ date_str, row[:points] ] ])
+  end
+
   value_data.push(values)
   #response = service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
 end
 
-batch.update!( data: value_data, value_input_option: "RAW" )
-response = service.batch_update_values( spreadsheet_id, batch )
+if UPDATE_REPORT
+  Log.debug("Updating sheet...")
+  batch.update!( data: value_data, value_input_option: "RAW" )
+  response = service.batch_update_values( spreadsheet_id, batch )
+end
 
-values = Google::Apis::SheetsV4::ValueRange.new()
-write_range = "100 points!D1"
-values.update!( :values => [ [ num_days_this_month ] ])
-response = service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
+if UPDATE_MONTH_CELL
+  values = Google::Apis::SheetsV4::ValueRange.new()
+  write_range = "100 points!D1"
+  values.update!( :values => [ [ num_days_this_month ] ])
+  response = service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
+end
 
-
-
-
+Log.info("Complete")
