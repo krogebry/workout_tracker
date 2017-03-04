@@ -35,6 +35,8 @@ require 'fileutils'
 
 Log = Logger.new(STDOUT)
 
+MONTHLY_GOAL = 116.0
+
 FLUSH_CACHE = true
 UPDATE_REPORT = true
 UPDATE_MONTH_CELL = false
@@ -113,6 +115,7 @@ num_points_so_far = 0.0
 
 data.each do |row|
   ts = Time.strptime( row[0], "%m/%d/%Y %T" )
+  next if ts.month != this_month
   activity = row[1]
   effort = row[2].to_i
   notes = row[3]
@@ -128,9 +131,8 @@ end
 batch = Google::Apis::SheetsV4::BatchUpdateValuesRequest.new()
 value_data = []
 
-monthly_goal = 100.0
 num_days_left = num_days_this_month.to_f - current_time.mday.to_f
-average_goal_per_day = (monthly_goal - num_points_so_far) / num_days_left
+average_goal_per_day = (MONTHLY_GOAL - num_points_so_far) / num_days_left
 Log.debug("Average goal: %.2f" % average_goal_per_day)
 
 for day_number, row in progress_report
