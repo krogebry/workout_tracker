@@ -1,12 +1,10 @@
 package main
 
 import (
-    "fmt"
-    "net/http"
-    //"encoding/json"
-    //"github.com/gorilla/mux"
+	"fmt"
+	"net/http"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintln(w, "Welcome!")
+	fmt.Fprintln(w, "Welcome!")
 }

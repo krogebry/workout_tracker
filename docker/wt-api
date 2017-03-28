@@ -1,12 +1,14 @@
-#FROM golang:alpine
 FROM golang:wheezy
 
 RUN mkdir -p /opt/wt/bin
 RUN mkdir -p /var/log/wt-api/
 
-COPY bin/wt-api /opt/wt/bin/wt-api
+RUN wget "http://ftp.us.debian.org/debian/pool/main/j/jq/jq_1.4-1~bpo70+1_amd64.deb"
+RUN dpkg -i jq_1.4-1~bpo70+1_amd64.deb
 
-#CMD /opt/wt/bin/wt-api >> /var/log/wt-api/api.log 2>&1
-ENTRYPOINT ["/opt/wt/bin/wt-api"] 
+COPY bin/wt-api /opt/wt/bin/wt-api
+COPY vault.sh /opt/wt/bin/vault.sh
+
+ENTRYPOINT ["/opt/wt/bin/vault.sh"]
 
 EXPOSE 8080

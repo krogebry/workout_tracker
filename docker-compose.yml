@@ -5,8 +5,9 @@ services:
     build:
       context: ./
       dockerfile: ./docker/wt-api
-    #volumes:
-      #- /mnt/data/wt/logs/:/var/log/wt-api/
+    environment:
+      VAULT_URL: "https://172.22.1.62:8200"
+      VAULT_AUTH_TOKEN: "c6cff822-5063-b769-ab72-2a7d270256cc"
     links:
       - redis
       - database

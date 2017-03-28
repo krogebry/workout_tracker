@@ -1,7 +1,7 @@
 BINARY=wt-api
 
-VERSION="0.4.0"
 BUILD_TIME=`date +%FT%T%z`
+VERSION="0.4.13"
 
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 
@@ -31,12 +31,16 @@ build-client:
 	go build -o bin/wt-client src/github.com/krogebry/wt-client/*.go
 	chmod 755 bin/wt-client
 
-
 push:
-	docker tag wt-api:${VERSION} krogebry/wt-api:latest
-	docker tag wt-api:${VERSION} krogebry/wt-api:${VERSION}
-	docker push krogebry/wt-api:latest
-	docker push krogebry/wt-api:${VERSION}
+	#docker tag wt-api:${VERSION} krogebry/wt-api:latest
+	#docker tag wt-api:${VERSION} krogebry/wt-api:${VERSION}
+	#docker push krogebry/wt-api:latest
+	#docker push krogebry/wt-api:${VERSION}
+
+	docker tag wt-api:${VERSION} 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
+	docker tag wt-api:${VERSION} 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
+	docker push 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
+	docker push 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
 
 docker_image:
 	docker build -t wt-api:${VERSION} -f docker/wt-api .
