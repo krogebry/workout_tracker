@@ -1,7 +1,10 @@
 BINARY=wt-api
 
 BUILD_TIME=`date +%FT%T%z`
-VERSION="0.4.13"
+VERSION="0.4.22"
+
+ECR_ACCOUNT_ID=168860074409
+#ECR_ACCOUNT_ID=247080884579
 
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 
@@ -37,10 +40,11 @@ push:
 	#docker push krogebry/wt-api:latest
 	#docker push krogebry/wt-api:${VERSION}
 
-	docker tag wt-api:${VERSION} 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
-	docker tag wt-api:${VERSION} 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
-	docker push 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
-	docker push 168860074409.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
+	docker tag wt-api:${VERSION} ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
+	docker tag wt-api:${VERSION} ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
+
+	docker push ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
+	docker push ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
 
 docker_image:
 	docker build -t wt-api:${VERSION} -f docker/wt-api .

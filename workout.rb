@@ -35,7 +35,7 @@ require 'fileutils'
 
 Log = Logger.new(STDOUT)
 
-MONTHLY_GOAL = 116.0
+MONTHLY_GOAL = 128.0
 
 FLUSH_CACHE = true
 UPDATE_REPORT = true
@@ -50,7 +50,7 @@ SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 
 ##
 # Ensure valid credentials, either by restoring from the saved credentials
-# files or intitiating an OAuth2 authorization. If authorization is required,
+# files or initiating an OAuth2 authorization. If authorization is required,
 # the user's default browser will be launched to approve the request.
 #
 # @return [Google::Auth::UserRefreshCredentials] OAuth2 credentials
@@ -93,7 +93,6 @@ num_days_this_month.times do |i|
   progress_report[i+1] = {}
 end
 
-
 if FLUSH_CACHE
   Log.debug("Getting from source.")
   read_range = 'Form Responses 1!A2:E'
@@ -101,7 +100,7 @@ if FLUSH_CACHE
   puts 'No data found.' if response.values.empty?
   data = response.values
   #pp data.to_json
-  
+
   File.open("/tmp/data.json", "w") do |f|
     f.puts( data.to_json )
   end
@@ -122,8 +121,8 @@ data.each do |row|
   points = row[4].to_i
 
   Log.debug("%s - %s - %s" % [ts, points, activity])
-  
-  progress_report[ts.day][:points] = 0 if !progress_report[ts.day].has_key?( :points )
+
+  progress_report[ts.day][:points] = 0 unless progress_report[ts.day].has_key?( :points )
   progress_report[ts.day][:points] += points
   num_points_so_far += points
 end
@@ -132,6 +131,8 @@ batch = Google::Apis::SheetsV4::BatchUpdateValuesRequest.new()
 value_data = []
 
 num_days_left = num_days_this_month.to_f - current_time.mday.to_f
+num_days_left += 1 if num_days_left == 0
+Log.debug('NumDaysLeft: %s' % num_days_left)
 average_goal_per_day = (MONTHLY_GOAL - num_points_so_far) / num_days_left
 Log.debug("Average goal: %.2f" % average_goal_per_day)
 
@@ -139,7 +140,7 @@ for day_number, row in progress_report
   write_range = "100 points!A%i" % (day_number+1)
   values = Google::Apis::SheetsV4::ValueRange.new()
   date_str = "%s/%s/%s" % [this_month, day_number, current_time.year]
-  
+
   if day_number >= current_time.mday
     values.update!( :range => write_range, :values => [ [ date_str, row[:points], average_goal_per_day ] ])
   else
@@ -147,20 +148,19 @@ for day_number, row in progress_report
   end
 
   value_data.push(values)
-  #response = service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
 end
 
 if UPDATE_REPORT
   Log.debug("Updating sheet...")
   batch.update!( data: value_data, value_input_option: "RAW" )
-  response = service.batch_update_values( spreadsheet_id, batch )
+  service.batch_update_values( spreadsheet_id, batch )
 end
 
 if UPDATE_MONTH_CELL
   values = Google::Apis::SheetsV4::ValueRange.new()
   write_range = "100 points!D1"
   values.update!( :values => [ [ num_days_this_month ] ])
-  response = service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
+  service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
 end
 
 Log.info("Complete")
