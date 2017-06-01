@@ -35,7 +35,7 @@ require 'fileutils'
 
 Log = Logger.new(STDOUT)
 
-MONTHLY_GOAL = 128.0
+MONTHLY_GOAL = 100.0
 
 FLUSH_CACHE = true
 UPDATE_REPORT = true
