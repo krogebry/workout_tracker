@@ -1,10 +1,7 @@
 BINARY=wt-api
 
 BUILD_TIME=`date +%FT%T%z`
-VERSION="0.4.22"
-
-ECR_ACCOUNT_ID=168860074409
-#ECR_ACCOUNT_ID=247080884579
+VERSION="0.5.1"
 
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 
@@ -17,15 +14,13 @@ dc_up:
 	docker-compose up
 
 deps:
-	#go get gopkg.in/mgo.v2
 	go get github.com/go-sql-driver/mysql
 	go get github.com/Sirupsen/logrus
-	#go get gopkg.in/urfave/cli.v2
 	go get github.com/urfave/cli
 	go get -u google.golang.org/api/sheets/v4
 	go get -u golang.org/x/oauth2/...
-	#cd src/github.com/krogebry/workout_tracker/
-	#PWD="${HOME}/dev/workout_tracker/src/github.com/krogebry/workout_tracker/" go get 
+	cd src/github.com/krogebry/workout_tracker/
+	PWD="${HOME}/dev/workout_tracker/src/github.com/krogebry/workout_tracker/" go get 
 
 build:
 	go build ${LDFLAGS} -o bin/$(BINARY) src/github.com/krogebry/workout_tracker/*.go
@@ -35,16 +30,11 @@ build-client:
 	chmod 755 bin/wt-client
 
 push:
-	#docker tag wt-api:${VERSION} krogebry/wt-api:latest
-	#docker tag wt-api:${VERSION} krogebry/wt-api:${VERSION}
-	#docker push krogebry/wt-api:latest
-	#docker push krogebry/wt-api:${VERSION}
+	docker tag wt-api:${VERSION} ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/workout-tracker:latest
+	docker tag wt-api:${VERSION} ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/workout-tracker:${VERSION}
 
-	docker tag wt-api:${VERSION} ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
-	docker tag wt-api:${VERSION} ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
-
-	docker push ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:latest
-	docker push ${ECR_ACCOUNT_ID}.dkr.ecr.us-west-2.amazonaws.com/workouts:${VERSION}
+	docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/workout-tracker:latest
+	docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/workout-tracker:${VERSION}
 
 docker_image:
 	docker build -t wt-api:${VERSION} -f docker/wt-api .
@@ -57,8 +47,8 @@ create_db_vol:
 
 docker_cleanup:
 	# Kill all running containers.
-	#docker kill $(docker ps -q)
+	docker kill $(docker ps -q)
 	# Delete all stopped containers.
-	#docker rm $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
 	# Delete all untagged images.
-	#docker rmi $(docker images -q -f dangling=true)
+	docker rmi $(docker images -q -f dangling=true)
