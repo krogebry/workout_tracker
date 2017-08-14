@@ -1,7 +1,7 @@
 BINARY=wt-api
 
 BUILD_TIME=`date +%FT%T%z`
-VERSION="0.5.1"
+VERSION="0.7.5"
 
 LDFLAGS=-ldflags "-X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME}"
 
@@ -14,13 +14,16 @@ dc_up:
 	docker-compose up
 
 deps:
-	go get github.com/go-sql-driver/mysql
-	go get github.com/Sirupsen/logrus
-	go get github.com/urfave/cli
-	go get -u google.golang.org/api/sheets/v4
-	go get -u golang.org/x/oauth2/...
-	cd src/github.com/krogebry/workout_tracker/
-	PWD="${HOME}/dev/workout_tracker/src/github.com/krogebry/workout_tracker/" go get 
+	# go get github.com/aws/aws-sdk-go/aws/session
+	go get github.com/aws/aws-sdk-go/service/s3/s3crypto
+	# go get github.com/go-sql-driver/mysql
+	# go get github.com/Sirupsen/logrus
+	# go get github.com/urfave/cli
+	# go get -u google.golang.org/api/sheets/v4
+	# go get -u golang.org/x/oauth2/...
+	# go get -u github.com/aws/aws-sdk-go/service/s3
+	# cd src/github.com/krogebry/workout_tracker/
+	# PWD="${HOME}/dev/workout_tracker/src/github.com/krogebry/workout_tracker/" go get 
 
 build:
 	go build ${LDFLAGS} -o bin/$(BINARY) src/github.com/krogebry/workout_tracker/*.go

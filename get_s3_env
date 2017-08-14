@@ -1,22 +1,16 @@
 #!/usr/bin/env ruby
-
 # https://gist.github.com/themoxman/1d137b9a1729ba8722e4
-
 require 'aws-sdk'
+s3_client = Aws::S3::Client.new(region: ENV['AWS_DEFAULT_REGION'])
+kms_client = Aws::KMS::Client.new(region: ENV['AWS_DEFAULT_REGION'])
 
-# basic S3 client
-# note: the client will use the instance profile credentials
-#       when this script is called from the ec2 instance
-s3_client = Aws::S3::Client.new(region: 'us-east-1')
-
-# kms client
-# note: the client will use the instance profile credentials
-#       when this script is called from the ec2 instance
-kms_client = Aws::KMS::Client.new(region: 'us-east-1')
+#creds = Aws::SharedCredentials.new()
+#s3_client = Aws::S3::Client.new(region: ENV['AWS_DEFAULT_REGION'], credentials: creds)
+#kms_client = Aws::KMS::Client.new(region: ENV['AWS_DEFAULT_REGION'], credentials: creds)
 
 # retrieve cmk key id
 aliases = kms_client.list_aliases.aliases
-key = aliases.find { |alias_struct| alias_struct.alias_name == "alias/chime-secrets" }
+key = aliases.find { |alias_struct| alias_struct.alias_name == format("alias/workout-tracker-%s", ENV['ENV_NAME']) }
 key_id = key.target_key_id
 
 # encryption client
@@ -26,10 +20,8 @@ s3_encryption_client = Aws::S3::Encryption::Client.new(
   kms_client: kms_client,
 )
 
-# retrieve and decrypt .env from s3
-response = s3_encryption_client.get_object(bucket: 'chime-secrets', key: '.env')
+response = s3_encryption_client.get_object(bucket: 'workout-tracker', key: format('%s/env', ENV['ENV_NAME']))
 
-# build string of env vars to be exported.
 exports = ""
 response.body.read.each_line { |line| exports << "export #{line.chomp};" }
 

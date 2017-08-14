@@ -6,29 +6,25 @@ services:
       context: ./
       dockerfile: ./docker/wt-api
     environment:
-      VAULT_URL: "https://172.22.1.62:8200"
-      VAULT_AUTH_TOKEN: "c6cff822-5063-b769-ab72-2a7d270256cc"
-    links:
-      - redis
-      - database
+      ENV_NAME: dev
+      AWS_PROFILE: default
+      AWS_DEFAULT_REGION: us-east-1
+    #links:
+      #- redis
+      #- database
     ports:
       - "8080:8080"
-    depends_on:
-      - redis
-      - database
-  # static_web:
-  #   image: nginx
-  #   volumes:
-  #     - ./static/:/usr/share/nginx/html/
-  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-  #   ports:
-  #     - "80:80"
-  redis:
-    image: redis
-  database:
-    image: mongo
-    ports:
-      - "27017:27017"
+    #depends_on:
+      #- redis
+      #- database
     volumes:
-      - /mnt/data/wt/mongodb:/data/db
+      - /home/krogebry/.aws/:/root/.aws/
+  #redis:
+    #image: redis
+  #database:
+    #image: mongo
+    #ports:
+      #- "27017:27017"
+    #volumes:
+      #- /mnt/data/wt/mongodb:/data/db
 
