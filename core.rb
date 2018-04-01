@@ -35,7 +35,7 @@ require 'fileutils'
 
 Log = Logger.new(STDOUT)
 
-MONTHLY_GOAL = 98.0
+MONTHLY_GOAL = 100.0
 
 FLUSH_CACHE = true
 UPDATE_REPORT = true
@@ -81,13 +81,11 @@ service = Google::Apis::SheetsV4::SheetsService.new
 service.client_options.application_name = APPLICATION_NAME
 service.authorization = authorize
 
-# spreadsheet_id = '1z6wdhMUnyKbX6ld1Qmhfh89Xncf74CW33donnQXhRm0'
-spreadsheet_id = '160M424O9kyoynZrexGpWlCM8sg2FGhtIX0sthqVQoJU'
+#spreadsheet_id = '1z6wdhMUnyKbX6ld1Qmhfh89Xncf74CW33donnQXhRm0'
+spreadsheet_id = '11-sma0XqOeh93zR6fxRfRqCaTtnBtYXty-OyrF_gunQ'
 
 current_time = Time.new
-# current_time = Time.new(2018,03,31)
 this_month = current_time.month
-# this_month = 3
 num_days_this_month = Date.new(current_time.year, current_time.month, -1).mday
 Log.debug("This month: %s (%i)" % [this_month, num_days_this_month])
 progress_report = {}
@@ -98,12 +96,9 @@ end
 
 if FLUSH_CACHE
   Log.debug("Getting from source.")
-  read_range = 'Form Responses!A2:E'
+  read_range = 'Form Responses 2!A2:E'
   response = service.get_spreadsheet_values(spreadsheet_id, read_range)
-  if response.values.nil? || response.values.empty?
-    puts 'No data found.'
-  end
-
+  puts 'No data found.' if response.values.empty?
   data = response.values
   #pp data.to_json
 
@@ -116,40 +111,34 @@ else
 
 end
 
-# pp data
-# exit
-
 num_points_so_far = 0.0
 
 data.each do |row|
   ts = Time.strptime( row[0], "%m/%d/%Y %T" )
   next if ts.month != this_month
   activity = row[1]
-  # effort = row[2].to_i
-  points = row[3].to_i
-  fractional = row[4].to_f
-  # notes = row[5]
+  effort = row[2].to_i
+  points = row[3].to_f
+  notes = row[4]
 
-  total_points = points + fractional
-
-  Log.debug("%s - %s - %s" % [ts, total_points, activity])
+  Log.debug("%s - %s - %s" % [ts, points, activity])
 
   progress_report[ts.day][:points] = 0 unless progress_report[ts.day].has_key?( :points )
-  progress_report[ts.day][:points] += total_points
-  num_points_so_far += total_points
+  progress_report[ts.day][:points] += points
+  num_points_so_far += points
 end
 
 batch = Google::Apis::SheetsV4::BatchUpdateValuesRequest.new()
 value_data = []
 
-num_days_left = num_days_this_month.to_f - (current_time.mday.to_f - 1)
+num_days_left = num_days_this_month.to_f - current_time.mday.to_f
 num_days_left += 1 if num_days_left == 0
-Log.debug('NumDaysLeft: %s (%i - %i)' % [num_days_left, num_days_this_month, current_time.mday])
+Log.debug('NumDaysLeft: %s' % num_days_left)
 average_goal_per_day = (MONTHLY_GOAL - num_points_so_far) / num_days_left
 Log.debug("Average goal: %.2f" % average_goal_per_day)
 
 for day_number, row in progress_report
-  write_range = "Monthly Scorecard!A%i" % (day_number+1)
+  write_range = "100 points!A%i" % (day_number+1)
   values = Google::Apis::SheetsV4::ValueRange.new()
   date_str = "%s/%s/%s" % [this_month, day_number, current_time.year]
 
@@ -170,7 +159,7 @@ end
 
 if UPDATE_MONTH_CELL
   values = Google::Apis::SheetsV4::ValueRange.new()
-  write_range = "Monthly Scorecard!D1"
+  write_range = "100 points!D1"
   values.update!( :values => [ [ num_days_this_month ] ])
   service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
 end
