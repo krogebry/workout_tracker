@@ -35,7 +35,7 @@ require 'fileutils'
 
 Log = Logger.new(STDOUT)
 
-MONTHLY_GOAL = 98.0
+MONTHLY_GOAL = 100.0
 
 FLUSH_CACHE = true
 UPDATE_REPORT = true
@@ -85,7 +85,7 @@ service.authorization = authorize
 spreadsheet_id = '160M424O9kyoynZrexGpWlCM8sg2FGhtIX0sthqVQoJU'
 
 current_time = Time.new
-# current_time = Time.new(2018,03,31)
+# current_time = Time.new(2018,05,1)
 this_month = current_time.month
 # this_month = 3
 num_days_this_month = Date.new(current_time.year, current_time.month, -1).mday
