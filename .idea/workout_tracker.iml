@@ -9,27 +9,25 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Go SDK" level="project" />
     <orderEntry type="library" name="GOPATH &lt;workout_tracker&gt;" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="addressable (v2.5.1, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="addressable (v2.5.2, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.16.0, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="declarative (v0.0.9, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="declarative (v0.0.10, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="declarative-option (v0.1.0, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="faraday (v0.12.2, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="google-api-client (v0.13.1, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="googleauth (v0.5.3, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faraday (v0.15.2, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="googleauth (v0.6.2, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="httpclient (v2.8.3, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="jwt (v1.5.6, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jwt (v2.1.0, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="little-plugger (v1.1.4, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="logging (v2.2.2, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="memoist (v0.16.0, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.1, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2016.0521, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.12.1, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.13.1, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multipart-post (v2.0.0, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="os (v0.9.6, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="public_suffix (v2.0.5, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="public_suffix (v3.0.2, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="representable (v3.0.4, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="retriable (v3.0.2, RVM: ruby-2.4.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="signet (v0.7.3, RVM: ruby-2.4.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="signet (v0.8.1, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.20.0, RVM: ruby-2.4.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uber (v0.1.0, RVM: ruby-2.4.0) [gem]" level="application" />
   </component>

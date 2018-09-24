@@ -1,5 +1,5 @@
 bin*
 pkg/*
 client_secret.json
-.idea/*
+.idea
 Gemfile.lock

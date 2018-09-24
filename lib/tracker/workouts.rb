@@ -20,7 +20,7 @@ module Tracker
 
       def setup_time
         @current_time = Time.new
-        # current_time = Time.new(2018,05,1)
+        # @current_time = Time.new(2018, 8, 1)
 
         @this_month = @current_time.month
         @num_days_this_month = Date.new(@current_time.year, @current_time.month, -1).mday
