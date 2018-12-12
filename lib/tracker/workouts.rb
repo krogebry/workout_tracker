@@ -45,6 +45,8 @@ module Tracker
           points = row[3].to_i
           fractional = row[4].to_f
 
+          points *= -1 if activity == 'Bad habit'
+
           total_points = points + fractional
 
           LOG.debug(format('%s - %s - %s', ts, total_points, activity))
