@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9c6ce8c-36c5-4af4-8a4d-8458c6d343f3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workout_tracker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workout_tracker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tracker/cli.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tracker/cli.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tracker/workouts.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tracker/workouts.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/tracker.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/conf/tracker.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,29 +18,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="cli.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tracker.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/tracker/tracker.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workouts.rb" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tracker/workouts.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+            <state relative-caret-position="-1283">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/tracker.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -58,6 +55,9 @@
       <find>124</find>
       <find>SCOPE</find>
       <find>spreadsheet_id</find>
+      <find>Unable to determine</find>
+      <find>This mon</find>
+      <find>setup_time</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -70,28 +70,19 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/lib/tracker/tracker.rb" />
         <option value="$PROJECT_DIR$/lib/tracker/auth.rb" />
-        <option value="$PROJECT_DIR$/conf/tracker.yaml" />
         <option value="$PROJECT_DIR$/bin/tracker" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/lib/tracker/cli.rb" />
         <option value="$PROJECT_DIR$/lib/tracker/workouts.rb" />
+        <option value="$PROJECT_DIR$/conf/tracker.yaml" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1280" />
     <option name="height" value="800" />
   </component>
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
@@ -99,6 +90,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -110,6 +102,11 @@
               <item name="workout_tracker" type="b2602c69:ProjectViewProjectNode" />
               <item name="workout_tracker" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="workout_tracker" type="b2602c69:ProjectViewProjectNode" />
+              <item name="workout_tracker" type="462c0819:PsiDirectoryNode" />
+              <item name="conf" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="workout_tracker" type="b2602c69:ProjectViewProjectNode" />
@@ -126,16 +123,24 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
-    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.settings.patched" value="true" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
+  </component>
+  <component name="RubyModuleManagerSettings">
+    <option name="blackListedRootsPaths">
+      <list>
+        <option value="$PROJECT_DIR$/../shatterdome-worker" />
+      </list>
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -187,93 +192,45 @@
       <workItem from="1529079975262" duration="2186000" />
       <workItem from="1529807521462" duration="84000" />
       <workItem from="1533227930032" duration="333000" />
+      <workItem from="1544641246888" duration="262000" />
+      <workItem from="1544828293949" duration="91000" />
+      <workItem from="1546645795378" duration="812000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25223000" />
+    <option name="totallyTimeSpent" value="26388000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3352181" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32476637" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28836834" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27910054" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32936507" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32936507" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27836412" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32476637" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32936507" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="54" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="54" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/workouts.go" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/api.go" />
-    <entry file="file://$PROJECT_DIR$/quickstart.go" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/api.go" />
-    <entry file="file://$PROJECT_DIR$/quickstart.go" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/api.go" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
-    <entry file="file://$PROJECT_DIR$/workout.rb" />
     <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/logger.go" />
     <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/healthz.go" />
     <entry file="file://$PROJECT_DIR$/src/github.com/krogebry/workout_tracker/workout_tracker.go" />
@@ -327,20 +284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/tracker.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tracker/tracker.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -348,10 +291,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tracker/cli.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/tracker.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tracker/workouts.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="-1283">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
         </state>
       </provider>
     </entry>

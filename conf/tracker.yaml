@@ -4,13 +4,13 @@ update_report: true
 update_month_cell: false
 google_sheets:
   oob_uri: 'urn:ietf:wg:oauth:2.0:oob'
-  application_name: Workout Tracker'
+  application_name: Workout Tracker
   client_secrets_path: client_secret.json
   scope: Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 accounts:
   - name: kira
-    doc_id: 18gOrvSSx5pZB04QODakocP3iQkeirtsfNQo142opJmk
+    doc_id: 1fwuBSsB6ji6Byud_jKjtWTfHDPKXeNPWFd2PKNPs9DE
     monthly_goal: 100.0
   - name: krogebry
-    doc_id: 160M424O9kyoynZrexGpWlCM8sg2FGhtIX0sthqVQoJU
+    doc_id: 1lKhKe3rAPQmbBzVIVM2DljB60eJ2WtzQtuQdepx-AmI
     monthly_goal: 100.0
