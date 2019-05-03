@@ -1,0 +1,128 @@
+#!/usr/bin/env ruby
+require 'google/apis/sheets_v4'
+require 'googleauth'
+require 'googleauth/stores/file_token_store'
+
+require 'time'
+require 'thor'
+require 'logger'
+require 'fileutils'
+
+LOG = Logger.new(STDOUT)
+
+# MONTHLY_GOAL = 100.0
+
+# FLUSH_CACHE = true
+# UPDATE_REPORT = true
+# UPDATE_MONTH_CELL = false
+
+# OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'
+# APPLICATION_NAME = 'Google Sheets API Ruby Quickstart'
+# CLIENT_SECRETS_PATH = 'client_secret.json'
+CREDENTIALS_PATH = File.join(Dir.home, '.credentials',
+                             'sheets.googleapis.com-workout-tracker.yaml')
+# SCOPE = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
+
+require './lib/tracker/tracker.rb'
+
+Tracker::CLI.start
+
+exit
+
+# s = Tracker::Workout::Service.new
+
+# spreadsheet_id = '1z6wdhMUnyKbX6ld1Qmhfh89Xncf74CW33donnQXhRm0'
+# spreadsheet_id = '160M424O9kyoynZrexGpWlCM8sg2FGhtIX0sthqVQoJU'
+#
+# current_time = Time.new
+# # current_time = Time.new(2018,05,1)
+# this_month = current_time.month
+# # this_month = 3
+# num_days_this_month = Date.new(current_time.year, current_time.month, -1).mday
+# LOG.debug("This month: %s (%i)" % [this_month, num_days_this_month])
+# progress_report = {}
+#
+# num_days_this_month.times do |i|
+#   progress_report[i+1] = {}
+# end
+
+# if FLUSH_CACHE
+#   LOG.debug("Getting from source.")
+#   read_range = 'Form Responses!A2:E'
+#   response = service.get_spreadsheet_values(spreadsheet_id, read_range)
+#   if response.values.nil? || response.values.empty?
+#     puts 'No data found.'
+#   end
+#
+#   data = response.values
+#   #pp data.to_json
+#
+#   File.open("/tmp/data.json", "w") do |f|
+#     f.puts( data.to_json )
+#   end
+#
+# else
+#   data = JSON::parse(File.read("/tmp/data.json"))
+#
+# end
+
+# pp data
+# exit
+
+# num_points_so_far = 0.0
+#
+# data.each do |row|
+#   ts = Time.strptime( row[0], "%m/%d/%Y %T" )
+#   next if ts.month != this_month
+#   activity = row[1]
+#   # effort = row[2].to_i
+#   points = row[3].to_i
+#   fractional = row[4].to_f
+#   # notes = row[5]
+#
+#   total_points = points + fractional
+#
+#   LOG.debug("%s - %s - %s" % [ts, total_points, activity])
+#
+#   progress_report[ts.day][:points] = 0 unless progress_report[ts.day].has_key?( :points )
+#   progress_report[ts.day][:points] += total_points
+#   num_points_so_far += total_points
+# end
+
+batch = Google::Apis::SheetsV4::BatchUpdateValuesRequest.new()
+value_data = []
+
+num_days_left = num_days_this_month.to_f - (current_time.mday.to_f - 1)
+num_days_left += 1 if num_days_left == 0
+LOG.debug('NumDaysLeft: %s (%i - %i)' % [num_days_left, num_days_this_month, current_time.mday])
+average_goal_per_day = (MONTHLY_GOAL - num_points_so_far) / num_days_left
+LOG.debug("Average goal: %.2f" % average_goal_per_day)
+
+for day_number, row in progress_report
+  write_range = "Monthly Scorecard!A%i" % (day_number+1)
+  values = Google::Apis::SheetsV4::ValueRange.new()
+  date_str = "%s/%s/%s" % [this_month, day_number, current_time.year]
+
+  if day_number >= current_time.mday
+    values.update!( :range => write_range, :values => [ [ date_str, row[:points], average_goal_per_day ] ])
+  else
+    values.update!( :range => write_range, :values => [ [ date_str, row[:points] ] ])
+  end
+
+  value_data.push(values)
+end
+
+if UPDATE_REPORT
+  LOG.debug("Updating sheet...")
+  batch.update!( data: value_data, value_input_option: "RAW" )
+  service.batch_update_values( spreadsheet_id, batch )
+end
+
+if UPDATE_MONTH_CELL
+  values = Google::Apis::SheetsV4::ValueRange.new()
+  write_range = "Monthly Scorecard!D1"
+  values.update!( :values => [ [ num_days_this_month ] ])
+  service.update_spreadsheet_value(spreadsheet_id, write_range, values, value_input_option: "RAW")
+end
+
+LOG.info("Complete")
